@@ -241,8 +241,7 @@ body {
       grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
     }
 
-    img,
-    div {
+    img {
       width: 100%;
       height: 500px;
       object-fit: cover;
@@ -270,8 +269,7 @@ body {
     padding: 20px;
     overflow-y: hidden;
 
-    img,
-    div, canvas {
+    img {
       margin-right: 20px;
       width: 90vw;
       height: 90vh;
