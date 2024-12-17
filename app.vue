@@ -220,7 +220,7 @@ body {
 }
 
 .outer {
-  width: 100vw;
+  width: 100dvw;
   display: flex;
   justify-content: center;
 
@@ -242,8 +242,8 @@ body {
     }
 
     img {
-      width: 90vw;
-      height: 500px;
+      width: 90dvw;
+      height: 90dvh;
       object-fit: cover;
       overflow: hidden;
 
@@ -271,8 +271,8 @@ body {
 
     img {
       margin-right: 20px;
-      width: 90vw;
-      height: 90vh;
+      width: 90dvw;
+      height: 90dvh;
       object-fit: cover;
     }
   }
