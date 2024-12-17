@@ -10,4 +10,13 @@ export default defineNuxtConfig({
   },
   ssr: false,
   modules: ["@vueuse/nuxt", "@unocss/nuxt"],
+  app: {
+    head: {
+      script: [
+        {
+          src: "/p5.min.js",
+        },
+      ],
+    },
+  },
 });

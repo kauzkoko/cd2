@@ -1,57 +1,14 @@
 <template>
-  <div
-    class="flex w-100dvw h-100dvh"
-    :class="[
-      isLandscape ? 'overflow-y-hidden' : 'overflow-x-hidden justify-center',
-    ]"
-  >
-    <div
-      class="mt-2"
-      :class="{
-        'ml-5 flex flex-row gap-3': isLandscape,
-        'grid grid-cols-3 gap-x-5': !isLandscape && width >= 1024,
-        'grid grid-cols-5 gap-x-5': !isLandscape && width >= 1660,
-      }"
-    >
-      <div
-        class="mt-3"
-        v-for="(block, index) in data?.contents"
-        :key="block.id"
-      >
-        <img
-          @click="selectImage(index)"
-          v-if="block.image"
-          :class="[
-            isLandscape
-              ? 'h-90vh'
-              : width >= 1024
-              ? 'w-[300px] h-full'
-              : 'w-90vw',
-          ]"
-          :src="block.image.display.url"
-        />
-      </div>
+  <div class="outer">
+    <div class="container">
+      <template v-for="block in data?.contents">
+        <img v-if="block.image" :src="block.image.display.url" />
+      </template>
     </div>
   </div>
 </template>
 
 <script setup>
-const { orientation } = useScreenOrientation();
-const { width } = useWindowSize();
-const isLandscape = computed(() => orientation.value === "landscape-primary" && width.value < 1024);
-
-const selectedImage = ref(null);
-const selectImage = (index) => {
-  selectedImage.value = index;
-};
-
-const { x, y } = useMouse({ type: "client" });
-const { element } = useElementByPoint({ x, y });
-watch(element, (el) => {
-  const { top, right, bottom, left, width, height } = useElementBounding(el);
-  console.log(selectedImage.value);
-});
-
 const { data } = await useFetch(
   "https://api.are.na/v2/channels/artworks-i-took-a-picture-of",
   {
@@ -67,5 +24,40 @@ html,
 body {
   margin: 0;
   padding: 0;
+}
+
+.outer {
+  width: 100vw;
+  display: flex;
+  justify-content: center;
+}
+
+.container {
+  padding: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+  }
+
+  @media (min-width: 1660px) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+}
+
+img {
+  width: 100%;
+  height: 500px;
+  background-color: blue;
+  
+
+  @media (max-width: 1024px) {
+    margin: 10px;
+  }
 }
 </style>
