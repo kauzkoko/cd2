@@ -242,7 +242,7 @@ body {
     }
 
     img {
-      width: 100%;
+      width: 90vw;
       height: 500px;
       object-fit: cover;
       overflow: hidden;
